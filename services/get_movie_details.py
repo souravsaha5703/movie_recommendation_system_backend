@@ -12,6 +12,7 @@ OMDB_URL = 'http://www.omdbapi.com/'
 RAPID_API_KEY =os.environ.get('RAPID_API_KEY')
 
 RAPID_API_SCRAPER_URL = 'https://imdb-scraper4.p.rapidapi.com/'
+RAPID_API_IMDB_REVIEWS_URL = 'https://imdb232.p.rapidapi.com/api/title/get-user-reviews'
 
 def get_movie_details_from_omdb(movie:str):
     parameters = {
@@ -39,23 +40,23 @@ def get_reviews(recommendation):
     all_movie_reviews = {}
 
     for id in recommendation:
-        querystring = {"work_type":"reviews_imdb","keyword_1":id,"keyword_2":"5"}
+        querystring = {"order":"DESC","spoiler":"EXCLUDE","tt":id,"sortBy":"HELPFULNESS_SCORE"}
 
         headers = {
 	        "x-rapidapi-key": RAPID_API_KEY,
-	        "x-rapidapi-host": "imdb-scraper4.p.rapidapi.com"
+	        "x-rapidapi-host": "imdb232.p.rapidapi.com"
         }
 
         try:
-            response = requests.get(RAPID_API_SCRAPER_URL, headers=headers, params=querystring)
+            response = requests.get(RAPID_API_IMDB_REVIEWS_URL, headers=headers, params=querystring)
             response.raise_for_status()
 
-            data = response.json()
+            data = response.json()['data']['title']['reviews']['edges']
 
             reviews = []
 
-            for r in data:
-              reviews.append(r['text'])
+            for r in data[:5]:
+                reviews.append(r['node']['text']['originalText']['plainText'])
 
             all_movie_reviews[id] = reviews
 
