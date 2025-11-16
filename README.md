@@ -121,6 +121,16 @@ pip install -r requirements.txt
 
 ```
 
+Create .env file in root directory and set values
+
+```env
+
+HUGGINGFACEHUB_API_TOKEN = ""
+OMDB_KEY = ""
+RAPID_API_KEY = ""
+
+```
+
 ▶️ Run the Backend
 ------------------
 
