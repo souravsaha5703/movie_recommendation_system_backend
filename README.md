@@ -215,15 +215,10 @@ Contributions are welcome!
     
 4.  Push and open a Pull Request
     
-
-📄 License
+💻 Frontend
 ----------
 
-```yaml
-
-MIT License © 2025 Sourav Saha
-
-```
+For frontend part visit https://github.com/souravsaha5703/movie_recommendation_system
 
 📬 Contact
 ----------
